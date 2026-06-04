@@ -70,10 +70,10 @@ const projects = [
 ]
 
 const skills = [
-  { category: 'Languages', items: ['JavaScript', 'TypeScript', 'HTML', 'CSS'] },
-  { category: 'Frameworks', items: ['React', 'Next.js', 'Node.js', 'Express'] },
+  { category: 'Languages', items: ['Python', 'C++', 'C', 'Java', 'JavaScript', 'TypeScript', 'HTML', 'CSS'] },
+  { category: 'Frameworks & Libraries', items: ['React', 'Next.js', 'Node.js', 'Express', 'Three.js', 'GSAP'] },
   { category: 'Styling', items: ['Tailwind CSS', 'CSS Modules', 'SASS', 'Styled Components'] },
-  { category: 'Tools', items: ['Git', 'GitHub', 'VS Code', 'Figma', 'Vercel'] },
+  { category: 'Tools & Platforms', items: ['Git', 'GitHub', 'VS Code', 'Figma', 'Vercel', 'Linux'] },
 ]
 
 export default function Home() {

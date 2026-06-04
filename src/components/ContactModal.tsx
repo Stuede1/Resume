@@ -14,14 +14,38 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
     company: '',
     message: '',
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Here you would typically send this data to your backend or email service
-    console.log('Form submitted:', formData)
-    alert('Thanks for reaching out! I\'ll get back to you soon.')
-    setFormData({ name: '', company: '', message: '' })
-    onClose()
+    setIsSubmitting(true)
+    setSubmitStatus('idle')
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (response.ok) {
+        setSubmitStatus('success')
+        setFormData({ name: '', company: '', message: '' })
+        setTimeout(() => {
+          onClose()
+          setSubmitStatus('idle')
+        }, 2000)
+      } else {
+        setSubmitStatus('error')
+      }
+    } catch (error) {
+      setSubmitStatus('error')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   if (!isOpen) return null
@@ -51,6 +75,18 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
             Fill out the form below and I'll get back to you as soon as possible.
           </p>
         </div>
+
+        {/* Success/Error Messages */}
+        {submitStatus === 'success' && (
+          <div className="mb-4 p-3 bg-green-50 text-green-700 rounded-lg text-sm">
+            Message sent successfully!
+          </div>
+        )}
+        {submitStatus === 'error' && (
+          <div className="mb-4 p-3 bg-red-50 text-red-700 rounded-lg text-sm">
+            Failed to send message. Please try again.
+          </div>
+        )}
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -100,9 +136,10 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
 
           <button
             type="submit"
-            className="w-full bg-neutral-900 text-white py-3 text-sm font-medium tracking-wide uppercase hover:bg-neutral-800 transition-colors rounded-lg"
+            disabled={isSubmitting}
+            className="w-full bg-neutral-900 text-white py-3 text-sm font-medium tracking-wide uppercase hover:bg-neutral-800 transition-colors rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Send Message
+            {isSubmitting ? 'Sending...' : 'Send Message'}
           </button>
         </form>
       </div>
