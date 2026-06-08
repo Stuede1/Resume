@@ -59,11 +59,11 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
       />
 
       {/* Modal */}
-      <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-md p-8 animate-in fade-in zoom-in duration-200">
+      <div className="relative bg-white dark:bg-neutral-900 rounded-2xl shadow-2xl w-full max-w-md p-8 animate-in fade-in zoom-in duration-200">
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-900 transition-colors"
+          className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
         >
           <X size={20} />
         </button>
@@ -91,7 +91,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-neutral-700 mb-1">
+            <label htmlFor="name" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
               Name
             </label>
             <input
@@ -100,13 +100,13 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
               required
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full px-4 py-2.5 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent transition-all"
+              className="w-full px-4 py-2.5 border border-neutral-200 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-900 dark:focus:ring-white focus:border-transparent transition-all"
               placeholder="Your name"
             />
           </div>
 
           <div>
-            <label htmlFor="company" className="block text-sm font-medium text-neutral-700 mb-1">
+            <label htmlFor="company" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
               Company
             </label>
             <input
@@ -114,13 +114,13 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
               id="company"
               value={formData.company}
               onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-              className="w-full px-4 py-2.5 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent transition-all"
+              className="w-full px-4 py-2.5 border border-neutral-200 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-900 dark:focus:ring-white focus:border-transparent transition-all"
               placeholder="Your company (optional)"
             />
           </div>
 
           <div>
-            <label htmlFor="message" className="block text-sm font-medium text-neutral-700 mb-1">
+            <label htmlFor="message" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
               Message
             </label>
             <textarea
@@ -129,7 +129,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
               rows={4}
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              className="w-full px-4 py-2.5 border border-neutral-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent transition-all resize-none"
+              className="w-full px-4 py-2.5 border border-neutral-200 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-900 dark:focus:ring-white focus:border-transparent transition-all resize-none"
               placeholder="Tell me about your project or opportunity..."
             />
           </div>
@@ -137,7 +137,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-neutral-900 text-white py-3 text-sm font-medium tracking-wide uppercase hover:bg-neutral-800 transition-colors rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 py-3 text-sm font-medium tracking-wide uppercase hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isSubmitting ? 'Sending...' : 'Send Message'}
           </button>

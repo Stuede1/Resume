@@ -21,7 +21,7 @@ interface ContactSectionProps {
 
 export function ContactSection({ onContactClick }: ContactSectionProps) {
   return (
-    <section id="contact" className="py-24 px-6 bg-white/30">
+    <section id="contact" className="py-24 px-6 bg-white/30 dark:bg-neutral-900/30">
       <div className="max-w-xl mx-auto text-center">
         <FadeIn direction="up">
           <h2 className="text-xs uppercase tracking-widest text-neutral-400 mb-2">Contact</h2>
@@ -34,29 +34,29 @@ export function ContactSection({ onContactClick }: ContactSectionProps) {
         <ScaleIn delay={0.2}>
           <button
             onClick={onContactClick}
-            className="inline-block bg-neutral-900 text-white px-8 py-3 text-sm font-medium tracking-wide uppercase hover:bg-neutral-800 transition-colors cursor-pointer"
+            className="inline-block bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 px-8 py-3 text-sm font-medium tracking-wide uppercase hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors cursor-pointer"
           >
             Let's Chat
           </button>
         </ScaleIn>
         <FadeIn direction="up" delay={0.3}>
           <div className="flex items-center justify-center gap-5 mt-8">
-            <a href="https://github.com/Stuede1" target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-neutral-900 transition-colors">
+            <a href="https://github.com/Stuede1" target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors">
               <GithubIcon />
             </a>
-            <a href="https://www.linkedin.com/in/cole-stuedeman" target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-neutral-900 transition-colors">
+            <a href="https://www.linkedin.com/in/cole-stuedeman" target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors">
               <LinkedinIcon />
             </a>
             <button
               onClick={onContactClick}
-              className="text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
+              className="text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors cursor-pointer"
             >
               <Mail size={20} />
             </button>
             <a
               href="/resume.pdf"
               download
-              className="text-neutral-400 hover:text-neutral-900 transition-colors"
+              className="text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
             >
               <FileText size={20} />
             </a>

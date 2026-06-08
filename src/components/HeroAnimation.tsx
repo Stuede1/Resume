@@ -64,7 +64,7 @@ export function HeroAnimation({ onContactClick }: { onContactClick?: () => void 
     >
       <motion.p
         variants={item}
-        className="text-sm uppercase tracking-widest text-neutral-400 mb-4"
+        className="text-sm uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-4"
       >
         Frontend Developer
       </motion.p>
@@ -76,20 +76,20 @@ export function HeroAnimation({ onContactClick }: { onContactClick?: () => void 
       </motion.h1>
       <motion.p
         variants={item}
-        className="mt-6 text-lg text-neutral-500 max-w-md mx-auto leading-relaxed"
+        className="mt-6 text-lg text-neutral-500 dark:text-neutral-400 max-w-md mx-auto leading-relaxed"
       >
         I build modern, responsive web experiences with clean code and thoughtful design.
       </motion.p>
       <motion.div variants={item} className="flex items-center justify-center gap-4 mt-8">
         <button
           onClick={onContactClick}
-          className="bg-neutral-900 text-white px-6 py-3 text-sm font-medium tracking-wide uppercase hover:bg-neutral-800 transition-colors cursor-pointer"
+          className="bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 px-6 py-3 text-sm font-medium tracking-wide uppercase hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors cursor-pointer"
         >
           Get in Touch
         </button>
         <a
           href="#projects"
-          className="border border-neutral-300 px-6 py-3 text-sm font-medium tracking-wide uppercase hover:border-neutral-900 transition-colors"
+          className="border border-neutral-300 dark:border-neutral-600 text-neutral-900 dark:text-white px-6 py-3 text-sm font-medium tracking-wide uppercase hover:border-neutral-900 dark:hover:border-white transition-colors"
         >
           View Work
         </a>
@@ -121,14 +121,14 @@ export function HeroAnimation({ onContactClick }: { onContactClick?: () => void 
         >
           <LinkedinIcon />
         </motion.a>
-        <motion.a
+        <motion.button
           variants={socialItem}
-          href="mailto:hello@example.com"
-          className="text-neutral-400 hover:text-neutral-900 transition-colors"
+          onClick={onContactClick}
+          className="text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
           whileHover={{ scale: 1.2 }}
         >
           <Mail size={20} />
-        </motion.a>
+        </motion.button>
         <motion.a
           variants={socialItem}
           href="/resume.pdf"

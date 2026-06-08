@@ -91,7 +91,7 @@ export default function Home() {
       </section>
 
       {/* About */}
-      <section id="about" className="py-24 px-6 bg-white/30">
+      <section id="about" className="py-24 px-6 bg-white/30 dark:bg-neutral-900/30">
         <div className="max-w-4xl mx-auto">
           <FadeIn direction="up">
             <h2 className="text-xs uppercase tracking-widest text-neutral-400 mb-2">About</h2>
@@ -101,7 +101,7 @@ export default function Home() {
               <h3 className="text-3xl font-bold tracking-tight">A bit about me</h3>
             </FadeIn>
             <FadeIn direction="right" delay={0.2}>
-              <div className="space-y-4 text-neutral-600 leading-relaxed">
+              <div className="space-y-4 text-neutral-600 dark:text-neutral-300 leading-relaxed">
                 <p>
                   I&apos;m a frontend developer with a passion for creating polished, user-friendly web applications.
                   I focus on writing clean, maintainable code and crafting interfaces that feel intuitive and responsive.
@@ -117,7 +117,7 @@ export default function Home() {
       </section>
 
       {/* Experience */}
-      <section id="experience" className="py-24 px-6 bg-white/60 border-y border-white/50">
+      <section id="experience" className="py-24 px-6 bg-white/60 dark:bg-neutral-900/60 border-y border-white/50 dark:border-neutral-800/50">
         <div className="max-w-4xl mx-auto">
           <FadeIn direction="up">
             <h2 className="text-xs uppercase tracking-widest text-neutral-400 mb-2">Experience</h2>
@@ -130,8 +130,8 @@ export default function Home() {
                   <p className="text-sm text-neutral-400 pt-1">{job.period}</p>
                   <div>
                     <h4 className="text-lg font-semibold">{job.role}</h4>
-                    <p className="text-sm text-neutral-500 mb-2">{job.company}</p>
-                    <p className="text-neutral-600 leading-relaxed">{job.description}</p>
+                    <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-2">{job.company}</p>
+                    <p className="text-neutral-600 dark:text-neutral-300 leading-relaxed">{job.description}</p>
                   </div>
                 </div>
               </StaggerItem>
@@ -141,7 +141,7 @@ export default function Home() {
       </section>
 
       {/* Education */}
-      <section id="education" className="py-24 px-6 bg-white/30">
+      <section id="education" className="py-24 px-6 bg-white/30 dark:bg-neutral-900/30">
         <div className="max-w-4xl mx-auto">
           <FadeIn direction="up">
             <h2 className="text-xs uppercase tracking-widest text-neutral-400 mb-2">Education</h2>
@@ -154,8 +154,8 @@ export default function Home() {
                   <p className="text-sm text-neutral-400 pt-1">{edu.period}</p>
                   <div>
                     <h4 className="text-lg font-semibold">{edu.degree}</h4>
-                    <p className="text-sm text-neutral-500 mb-2">{edu.school}</p>
-                    <p className="text-neutral-600 leading-relaxed">{edu.description}</p>
+                    <p className="text-sm text-neutral-500 dark:text-neutral-400 mb-2">{edu.school}</p>
+                    <p className="text-neutral-600 dark:text-neutral-300 leading-relaxed">{edu.description}</p>
                   </div>
                 </div>
               </StaggerItem>
@@ -165,7 +165,7 @@ export default function Home() {
       </section>
 
       {/* Projects */}
-      <section id="projects" className="py-24 px-6 bg-white/30">
+      <section id="projects" className="py-24 px-6 bg-white/30 dark:bg-neutral-900/30">
         <div className="max-w-4xl mx-auto">
           <FadeIn direction="up">
             <h2 className="text-xs uppercase tracking-widest text-neutral-400 mb-2">Projects</h2>
@@ -174,24 +174,24 @@ export default function Home() {
           <StaggerContainer staggerDelay={0.12} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {projects.map((project, i) => (
               <StaggerItem key={i} direction="up">
-                <div className="group border border-neutral-200 p-6 hover:border-neutral-400 transition-colors h-full">
+                <div className="group border border-neutral-200 dark:border-neutral-700 p-6 hover:border-neutral-400 dark:hover:border-neutral-500 transition-colors h-full">
                   <div className="flex items-start justify-between mb-4">
                     <h4 className="text-lg font-semibold">{project.title}</h4>
                     <div className="flex items-center gap-2">
-                      <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-neutral-300 hover:text-neutral-900 transition-colors">
+                      <a href={project.github} target="_blank" rel="noopener noreferrer" className="text-neutral-300 hover:text-neutral-900 dark:text-neutral-500 dark:hover:text-white transition-colors">
                         <GithubIcon size={16} />
                       </a>
-                      <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-neutral-300 hover:text-neutral-900 transition-colors">
+                      <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-neutral-300 hover:text-neutral-900 dark:text-neutral-500 dark:hover:text-white transition-colors">
                         <ExternalLink size={16} />
                       </a>
                     </div>
                   </div>
-                  <p className="text-sm text-neutral-500 leading-relaxed mb-4">{project.description}</p>
+                  <p className="text-sm text-neutral-500 dark:text-neutral-400 leading-relaxed mb-4">{project.description}</p>
                   <div className="flex flex-wrap gap-2">
                     {project.tech.map((t) => (
                       <span
                         key={t}
-                        className="text-[10px] uppercase tracking-widest bg-neutral-100 text-neutral-500 px-2 py-1"
+                        className="text-[10px] uppercase tracking-widest bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 px-2 py-1"
                       >
                         {t}
                       </span>
@@ -205,7 +205,7 @@ export default function Home() {
       </section>
 
       {/* Skills */}
-      <section id="skills" className="py-24 px-6 bg-white/60 border-y border-white/50">
+      <section id="skills" className="py-24 px-6 bg-white/60 dark:bg-neutral-900/60 border-y border-white/50 dark:border-neutral-800/50">
         <div className="max-w-4xl mx-auto">
           <FadeIn direction="up">
             <h2 className="text-xs uppercase tracking-widest text-neutral-400 mb-2">Skills</h2>
@@ -219,7 +219,7 @@ export default function Home() {
                 </h4>
                 <ul className="space-y-2">
                   {group.items.map((item) => (
-                    <li key={item} className="text-neutral-500 text-sm">
+                    <li key={item} className="text-neutral-500 dark:text-neutral-400 text-sm">
                       {item}
                     </li>
                   ))}
@@ -235,7 +235,7 @@ export default function Home() {
       <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 
       {/* Footer */}
-      <footer className="py-8 px-6 border-t border-neutral-100">
+      <footer className="py-8 px-6 border-t border-neutral-100 dark:border-neutral-800">
         <div className="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-neutral-400">
             &copy; {new Date().getFullYear()} Cole Stuedeman. All rights reserved.

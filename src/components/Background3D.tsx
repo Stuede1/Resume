@@ -187,9 +187,9 @@ function CameraRig() {
 
 export function Background3D() {
   return (
-    <div className="fixed inset-0 -z-10 bg-white pointer-events-none">
+    <div className="fixed inset-0 -z-10 pointer-events-none">
       <Canvas camera={{ position: [0, 0, 10], fov: 75 }} dpr={[1, 2]}>
-        <color attach="background" args={['#ffffff']} />
+        {/* Removed the fixed white background so the theme color shows through */}
         <ambientLight intensity={0.8} />
         <directionalLight position={[10, 10, 5]} intensity={1} />
         
