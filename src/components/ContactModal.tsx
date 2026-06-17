@@ -59,31 +59,37 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
       />
 
       {/* Modal */}
-      <div className="relative bg-white dark:bg-neutral-900 rounded-2xl shadow-2xl w-full max-w-md p-8 animate-in fade-in zoom-in duration-200">
+      <div
+        className="relative rounded-2xl shadow-2xl w-full max-w-md p-8"
+        style={{ background: 'var(--panel)', border: '1px solid var(--line)', color: 'var(--text)' }}
+      >
         {/* Close button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
+          className="absolute top-4 right-4 transition-colors cursor-pointer"
+          style={{ color: 'var(--muted)' }}
+          onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--text)' }}
+          onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--muted)' }}
         >
           <X size={20} />
         </button>
 
         {/* Header */}
         <div className="mb-6">
-          <h3 className="text-2xl font-bold tracking-tight mb-2">Let's Chat</h3>
-          <p className="text-neutral-500 text-sm">
-            Fill out the form below and I'll get back to you as soon as possible.
+          <h3 className="text-2xl font-bold tracking-tight mb-2" style={{ color: 'var(--text)' }}>Let&apos;s Chat</h3>
+          <p className="text-sm" style={{ color: 'var(--muted)' }}>
+            Fill out the form below and I&apos;ll get back to you as soon as possible.
           </p>
         </div>
 
         {/* Success/Error Messages */}
         {submitStatus === 'success' && (
-          <div className="mb-4 p-3 bg-green-50 text-green-700 rounded-lg text-sm">
+          <div className="mb-4 p-3 rounded-lg text-sm" style={{ background: 'var(--accent-soft)', color: 'var(--accent)' }}>
             Message sent successfully!
           </div>
         )}
         {submitStatus === 'error' && (
-          <div className="mb-4 p-3 bg-red-50 text-red-700 rounded-lg text-sm">
+          <div className="mb-4 p-3 rounded-lg text-sm bg-red-500/10 text-red-400">
             Failed to send message. Please try again.
           </div>
         )}
@@ -91,7 +97,7 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
+            <label htmlFor="name" className="block text-sm font-medium mb-1" style={{ color: 'var(--text)' }}>
               Name
             </label>
             <input
@@ -100,13 +106,18 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
               required
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full px-4 py-2.5 border border-neutral-200 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-900 dark:focus:ring-white focus:border-transparent transition-all"
+              className="w-full px-4 py-2.5 rounded-lg outline-none transition-all text-[15px]"
+              style={{
+                background: 'var(--bg)',
+                border: '1px solid var(--line-strong)',
+                color: 'var(--text)',
+              }}
               placeholder="Your name"
             />
           </div>
 
           <div>
-            <label htmlFor="company" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
+            <label htmlFor="company" className="block text-sm font-medium mb-1" style={{ color: 'var(--text)' }}>
               Company
             </label>
             <input
@@ -114,13 +125,18 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
               id="company"
               value={formData.company}
               onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-              className="w-full px-4 py-2.5 border border-neutral-200 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-900 dark:focus:ring-white focus:border-transparent transition-all"
+              className="w-full px-4 py-2.5 rounded-lg outline-none transition-all text-[15px]"
+              style={{
+                background: 'var(--bg)',
+                border: '1px solid var(--line-strong)',
+                color: 'var(--text)',
+              }}
               placeholder="Your company (optional)"
             />
           </div>
 
           <div>
-            <label htmlFor="message" className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-1">
+            <label htmlFor="message" className="block text-sm font-medium mb-1" style={{ color: 'var(--text)' }}>
               Message
             </label>
             <textarea
@@ -129,7 +145,12 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
               rows={4}
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              className="w-full px-4 py-2.5 border border-neutral-200 dark:border-neutral-700 dark:bg-neutral-800 dark:text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-900 dark:focus:ring-white focus:border-transparent transition-all resize-none"
+              className="w-full px-4 py-2.5 rounded-lg outline-none transition-all resize-none text-[15px]"
+              style={{
+                background: 'var(--bg)',
+                border: '1px solid var(--line-strong)',
+                color: 'var(--text)',
+              }}
               placeholder="Tell me about your project or opportunity..."
             />
           </div>
@@ -137,7 +158,8 @@ export function ContactModal({ isOpen, onClose }: ContactModalProps) {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 py-3 text-sm font-medium tracking-wide uppercase hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full py-3 text-sm font-medium tracking-wide uppercase rounded-lg transition-all duration-200 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+            style={{ background: 'var(--text)', color: 'var(--bg)' }}
           >
             {isSubmitting ? 'Sending...' : 'Send Message'}
           </button>

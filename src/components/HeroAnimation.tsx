@@ -3,15 +3,15 @@
 import { motion } from 'framer-motion'
 import { Mail, FileText } from 'lucide-react'
 
-const GithubIcon = ({ size = 20 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+const GithubIcon = () => (
+  <svg width={18} height={18} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.9 1.2 1.9 1.2 3.2 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z" />
   </svg>
 )
 
-const LinkedinIcon = ({ size = 20 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+const LinkedinIcon = () => (
+  <svg width={17} height={17} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M19 0H5a5 5 0 0 0-5 5v14a5 5 0 0 0 5 5h14a5 5 0 0 0 5-5V5a5 5 0 0 0-5-5zM8 19H5V8h3zM6.5 6.7a1.8 1.8 0 1 1 0-3.6 1.8 1.8 0 0 1 0 3.6zM20 19h-3v-5.6c0-3.4-4-3.1-4 0V19h-3V8h3v1.8c1.4-2.6 7-2.8 7 2.5z" />
   </svg>
 )
 
@@ -19,29 +19,16 @@ const container = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2,
-    },
+    transition: { staggerChildren: 0.12, delayChildren: 0.1 },
   },
 }
 
-const item = {
-  hidden: { opacity: 0, y: 30 },
+const fadeUp = {
+  hidden: { opacity: 0, y: 26 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: [0.25, 0.1, 0.25, 1] as const },
-  },
-}
-
-const nameItem = {
-  hidden: { opacity: 0, y: 50, scale: 0.95 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 1, ease: [0.25, 0.1, 0.25, 1] as const },
+    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] as const },
   },
 }
 
@@ -50,94 +37,200 @@ const socialItem = {
   visible: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 0.4, ease: [0.25, 0.1, 0.25, 1] as const },
+    transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] as const },
   },
 }
 
 export function HeroAnimation({ onContactClick }: { onContactClick?: () => void }) {
   return (
     <motion.div
-      className="max-w-2xl text-center"
+      className="flex flex-col items-center text-center"
       variants={container}
       initial="hidden"
       animate="visible"
     >
-      <motion.p
-        variants={item}
-        className="text-sm uppercase tracking-widest text-neutral-400 dark:text-neutral-500 mb-4"
+      {/* Status pill */}
+      <motion.div
+        variants={fadeUp}
+        className="inline-flex items-center gap-[9px] font-mono text-[12.5px] tracking-wide mb-8 px-3.5 py-[7px] rounded-full border"
+        style={{
+          color: 'var(--muted)',
+          borderColor: 'var(--line)',
+          background: 'color-mix(in srgb, var(--panel) 50%, transparent)',
+        }}
+      >
+        <span className="relative w-2 h-2 rounded-full bg-[#3ddc84]">
+          <span
+            className="absolute inset-[-4px] rounded-full border border-[#3ddc84]"
+            style={{ animation: 'ping 2s cubic-bezier(0.22,1,0.36,1) infinite' }}
+          />
+        </span>
+        Open to frontend roles · Minnesota
+      </motion.div>
+
+      {/* Eyebrow */}
+      <motion.div
+        variants={fadeUp}
+        className="font-mono text-[13px] tracking-[5px] uppercase mb-[18px]"
+        style={{ color: 'var(--faint)' }}
       >
         Frontend Developer
-      </motion.p>
+      </motion.div>
+
+      {/* Name */}
       <motion.h1
-        variants={nameItem}
-        className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1]"
+        variants={fadeUp}
+        className="text-[clamp(54px,11vw,132px)] font-bold leading-[0.92] tracking-[-4px] mb-[26px]"
       >
-        Cole<br />Stuedeman
+        <span className="block overflow-hidden">
+          <span
+            className="inline-block bg-clip-text"
+            style={{
+              background: 'linear-gradient(180deg, var(--text) 0%, color-mix(in srgb, var(--text) 55%, var(--bg)) 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
+            Cole
+          </span>
+        </span>
+        <span className="block overflow-hidden">
+          <span
+            className="inline-block bg-clip-text"
+            style={{
+              background: 'linear-gradient(180deg, var(--text) 0%, color-mix(in srgb, var(--text) 55%, var(--bg)) 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
+          >
+            Stuedeman
+          </span>
+        </span>
       </motion.h1>
+
+      {/* Lede */}
       <motion.p
-        variants={item}
-        className="mt-6 text-lg text-neutral-500 dark:text-neutral-400 max-w-md mx-auto leading-relaxed"
+        variants={fadeUp}
+        className="text-[clamp(16px,1.9vw,20px)] max-w-[540px] mx-auto mb-9"
+        style={{ color: 'var(--muted)', textWrap: 'balance' }}
       >
-        I build modern, responsive web experiences with clean code and thoughtful design.
+        I build modern, responsive web experiences with clean code and a sharp eye for detail — currently crafting interfaces in{' '}
+        <strong style={{ color: 'var(--text)' }}>Next.js</strong> &{' '}
+        <strong style={{ color: 'var(--text)' }}>React</strong>.
       </motion.p>
-      <motion.div variants={item} className="flex items-center justify-center gap-4 mt-8">
+
+      {/* CTA buttons */}
+      <motion.div variants={fadeUp} className="flex gap-3.5 flex-wrap justify-center mb-[34px]">
         <button
           onClick={onContactClick}
-          className="bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 px-6 py-3 text-sm font-medium tracking-wide uppercase hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors cursor-pointer"
+          className="relative inline-flex items-center gap-[9px] text-[14.5px] font-medium px-[26px] py-3.5 rounded-[11px] cursor-pointer transition-all duration-300"
+          style={{ background: 'var(--text)', color: 'var(--bg)', border: '1px solid transparent' }}
         >
-          Get in Touch
+          Get in touch <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
         </button>
         <a
           href="#projects"
-          className="border border-neutral-300 dark:border-neutral-600 text-neutral-900 dark:text-white px-6 py-3 text-sm font-medium tracking-wide uppercase hover:border-neutral-900 dark:hover:border-white transition-colors"
+          className="relative inline-flex items-center gap-[9px] text-[14.5px] font-medium px-[26px] py-3.5 rounded-[11px] border transition-all duration-300"
+          style={{ borderColor: 'var(--line-strong)', color: 'var(--text)' }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.borderColor = 'var(--accent)'
+            e.currentTarget.style.background = 'var(--accent-soft)'
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.borderColor = 'var(--line-strong)'
+            e.currentTarget.style.background = 'transparent'
+          }}
         >
-          View Work
+          View work
         </a>
       </motion.div>
+
+      {/* Social icons */}
       <motion.div
-        className="flex items-center justify-center gap-5 mt-10"
+        className="flex gap-2 justify-center"
         variants={container}
         initial="hidden"
         animate="visible"
-        transition={{ staggerChildren: 0.1, delayChildren: 1.2 }}
+        transition={{ staggerChildren: 0.08, delayChildren: 1 }}
       >
-        <motion.a
-          variants={socialItem}
-          href="https://github.com/Stuede1"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-neutral-400 hover:text-neutral-900 transition-colors"
-          whileHover={{ scale: 1.2 }}
-        >
-          <GithubIcon />
-        </motion.a>
-        <motion.a
-          variants={socialItem}
-          href="https://linkedin.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-neutral-400 hover:text-neutral-900 transition-colors"
-          whileHover={{ scale: 1.2 }}
-        >
-          <LinkedinIcon />
-        </motion.a>
+        {[
+          { href: 'https://github.com/Stuede1', label: 'GitHub', icon: <GithubIcon /> },
+          { href: 'https://www.linkedin.com/in/cole-stuedeman', label: 'LinkedIn', icon: <LinkedinIcon /> },
+        ].map((s) => (
+          <motion.a
+            key={s.label}
+            variants={socialItem}
+            href={s.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={s.label}
+            className="w-[42px] h-[42px] grid place-items-center border rounded-[11px] transition-all duration-200"
+            style={{ color: 'var(--muted)', borderColor: 'var(--line)' }}
+            whileHover={{ y: -3 }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = 'var(--text)'
+              e.currentTarget.style.borderColor = 'var(--accent)'
+              e.currentTarget.style.background = 'var(--accent-soft)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = 'var(--muted)'
+              e.currentTarget.style.borderColor = 'var(--line)'
+              e.currentTarget.style.background = 'transparent'
+            }}
+          >
+            {s.icon}
+          </motion.a>
+        ))}
         <motion.button
           variants={socialItem}
           onClick={onContactClick}
-          className="text-neutral-400 hover:text-neutral-900 transition-colors cursor-pointer"
-          whileHover={{ scale: 1.2 }}
+          aria-label="Email"
+          className="w-[42px] h-[42px] grid place-items-center border rounded-[11px] transition-all duration-200 cursor-pointer"
+          style={{ color: 'var(--muted)', borderColor: 'var(--line)', background: 'transparent' }}
+          whileHover={{ y: -3 }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.color = 'var(--text)'
+            e.currentTarget.style.borderColor = 'var(--accent)'
+            e.currentTarget.style.background = 'var(--accent-soft)'
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.color = 'var(--muted)'
+            e.currentTarget.style.borderColor = 'var(--line)'
+            e.currentTarget.style.background = 'transparent'
+          }}
         >
-          <Mail size={20} />
+          <Mail size={18} />
         </motion.button>
         <motion.a
           variants={socialItem}
           href="/resume.pdf"
           download
-          className="text-neutral-400 hover:text-neutral-900 transition-colors"
-          whileHover={{ scale: 1.2 }}
+          aria-label="Resume"
+          className="w-[42px] h-[42px] grid place-items-center border rounded-[11px] transition-all duration-200"
+          style={{ color: 'var(--muted)', borderColor: 'var(--line)' }}
+          whileHover={{ y: -3 }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.color = 'var(--text)'
+            e.currentTarget.style.borderColor = 'var(--accent)'
+            e.currentTarget.style.background = 'var(--accent-soft)'
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.color = 'var(--muted)'
+            e.currentTarget.style.borderColor = 'var(--line)'
+            e.currentTarget.style.background = 'transparent'
+          }}
         >
-          <FileText size={20} />
+          <FileText size={16} />
         </motion.a>
+      </motion.div>
+
+      {/* Scroll cue */}
+      <motion.div
+        variants={fadeUp}
+        className="scroll-cue absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2.5"
+      >
+        <span>SCROLL</span>
+        <span className="line" />
       </motion.div>
     </motion.div>
   )

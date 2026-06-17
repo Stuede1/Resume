@@ -4,35 +4,36 @@ import { useState, useEffect } from 'react'
 import { Moon, Sun } from 'lucide-react'
 
 export function ThemeToggle() {
-  const [isDark, setIsDark] = useState(false)
+  const [isLight, setIsLight] = useState(false)
 
   useEffect(() => {
-    const stored = localStorage.getItem('theme')
-    if (stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      setIsDark(true)
-      document.documentElement.classList.add('dark')
-    }
+    setIsLight(document.documentElement.classList.contains('light'))
   }, [])
 
   const toggle = () => {
-    const newMode = !isDark
-    setIsDark(newMode)
-    if (newMode) {
-      document.documentElement.classList.add('dark')
-      localStorage.setItem('theme', 'dark')
+    const goLight = !isLight
+    setIsLight(goLight)
+    if (goLight) {
+      document.documentElement.classList.add('light')
+      localStorage.setItem('cs-theme', 'light')
     } else {
-      document.documentElement.classList.remove('dark')
-      localStorage.setItem('theme', 'light')
+      document.documentElement.classList.remove('light')
+      localStorage.setItem('cs-theme', 'dark')
     }
   }
 
   return (
     <button
       onClick={toggle}
-      className="p-2 text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-white transition-colors cursor-pointer"
-      aria-label="Toggle dark mode"
+      className="w-[38px] h-[38px] grid place-items-center cursor-pointer border rounded-[10px] transition-all duration-200 hover:rotate-[15deg]"
+      style={{
+        borderColor: 'var(--line)',
+        color: 'var(--text)',
+        background: 'transparent',
+      }}
+      aria-label="Toggle theme"
     >
-      {isDark ? <Sun size={18} /> : <Moon size={18} />}
+      {isLight ? <Moon size={18} /> : <Sun size={18} />}
     </button>
   )
 }

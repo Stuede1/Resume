@@ -1,17 +1,17 @@
 'use client'
 
-import { Mail, FileText } from 'lucide-react'
-import { FadeIn, ScaleIn } from '@/components/ScrollAnimations'
+import { Mail } from 'lucide-react'
+import { FadeIn } from '@/components/ScrollAnimations'
 
-const GithubIcon = ({ size = 20 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+const GithubIcon = () => (
+  <svg width={18} height={18} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.2-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.9 1.2 1.9 1.2 3.2 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z" />
   </svg>
 )
 
-const LinkedinIcon = ({ size = 20 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+const LinkedinIcon = () => (
+  <svg width={17} height={17} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M19 0H5a5 5 0 0 0-5 5v14a5 5 0 0 0 5 5h14a5 5 0 0 0 5-5V5a5 5 0 0 0-5-5zM8 19H5V8h3zM6.5 6.7a1.8 1.8 0 1 1 0-3.6 1.8 1.8 0 0 1 0 3.6zM20 19h-3v-5.6c0-3.4-4-3.1-4 0V19h-3V8h3v1.8c1.4-2.6 7-2.8 7 2.5z" />
   </svg>
 )
 
@@ -21,45 +21,106 @@ interface ContactSectionProps {
 
 export function ContactSection({ onContactClick }: ContactSectionProps) {
   return (
-    <section id="contact" className="py-24 px-6 bg-white/30 dark:bg-neutral-900/30">
-      <div className="max-w-xl mx-auto text-center">
+    <section id="contact" className="relative z-[2] text-center py-[130px]">
+      <div className="max-w-[1180px] mx-auto px-[max(24px,5vw)]">
         <FadeIn direction="up">
-          <h2 className="text-xs uppercase tracking-widest text-neutral-400 mb-2">Contact</h2>
-          <h3 className="text-3xl font-bold tracking-tight mb-4">Let&apos;s work together</h3>
-          <p className="text-neutral-500 mb-8 leading-relaxed">
-            I&apos;m always open to new opportunities and interesting projects.
-            Feel free to reach out if you&apos;d like to connect.
+          <div className="seg-label" style={{ justifyContent: 'center' }}>Contact</div>
+        </FadeIn>
+        <FadeIn direction="up" delay={0.1}>
+          <h2 className="text-[clamp(40px,7vw,88px)] font-bold tracking-[-3px] leading-none mt-[18px] mb-6">
+            Let&apos;s build<br />
+            <span
+              className="bg-clip-text"
+              style={{
+                background: 'linear-gradient(180deg, var(--text), color-mix(in srgb, var(--text) 50%, var(--bg)))',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
+              something good.
+            </span>
+          </h2>
+        </FadeIn>
+        <FadeIn direction="up" delay={0.2}>
+          <p className="max-w-[480px] mx-auto mb-9 text-[17px]" style={{ color: 'var(--muted)' }}>
+            I&apos;m always open to new opportunities and interesting projects. Whether you have a role in mind or just want to say hello — my inbox is open.
           </p>
         </FadeIn>
-        <ScaleIn delay={0.2}>
+        <FadeIn direction="up" delay={0.2}>
           <button
             onClick={onContactClick}
-            className="inline-block bg-neutral-900 dark:bg-white text-white dark:text-neutral-900 px-8 py-3 text-sm font-medium tracking-wide uppercase hover:bg-neutral-800 dark:hover:bg-neutral-200 transition-colors cursor-pointer"
+            className="inline-flex items-center gap-3 font-mono text-[clamp(16px,2.4vw,24px)] pb-2 cursor-pointer transition-all duration-300 group"
+            style={{
+              color: 'var(--text)',
+              borderBottom: '1px solid var(--line-strong)',
+              background: 'none',
+              border: 'none',
+              borderBottomWidth: '1px',
+              borderBottomStyle: 'solid',
+              borderBottomColor: 'var(--line-strong)',
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.color = 'var(--accent)'
+              e.currentTarget.style.borderBottomColor = 'var(--accent)'
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.color = 'var(--text)'
+              e.currentTarget.style.borderBottomColor = 'var(--line-strong)'
+            }}
           >
-            Let's Chat
+            cstuedeman@gmail.com <span className="transition-all duration-300 group-hover:ml-1.5">→</span>
           </button>
-        </ScaleIn>
+        </FadeIn>
         <FadeIn direction="up" delay={0.3}>
-          <div className="flex items-center justify-center gap-5 mt-8">
-            <a href="https://github.com/Stuede1" target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors">
-              <GithubIcon />
-            </a>
-            <a href="https://www.linkedin.com/in/cole-stuedeman" target="_blank" rel="noopener noreferrer" className="text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors">
-              <LinkedinIcon />
-            </a>
+          <div className="flex gap-2 justify-center mt-[42px]">
+            {[
+              { href: 'https://github.com/Stuede1', label: 'GitHub', icon: <GithubIcon /> },
+              { href: 'https://www.linkedin.com/in/cole-stuedeman', label: 'LinkedIn', icon: <LinkedinIcon /> },
+            ].map((s) => (
+              <a
+                key={s.label}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={s.label}
+                className="w-[42px] h-[42px] grid place-items-center border rounded-[11px] transition-all duration-200"
+                style={{ color: 'var(--muted)', borderColor: 'var(--line)' }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = 'var(--text)'
+                  e.currentTarget.style.borderColor = 'var(--accent)'
+                  e.currentTarget.style.background = 'var(--accent-soft)'
+                  e.currentTarget.style.transform = 'translateY(-3px)'
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = 'var(--muted)'
+                  e.currentTarget.style.borderColor = 'var(--line)'
+                  e.currentTarget.style.background = 'transparent'
+                  e.currentTarget.style.transform = 'translateY(0)'
+                }}
+              >
+                {s.icon}
+              </a>
+            ))}
             <button
               onClick={onContactClick}
-              className="text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors cursor-pointer"
+              aria-label="Email"
+              className="w-[42px] h-[42px] grid place-items-center border rounded-[11px] transition-all duration-200 cursor-pointer"
+              style={{ color: 'var(--muted)', borderColor: 'var(--line)', background: 'transparent' }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.color = 'var(--text)'
+                e.currentTarget.style.borderColor = 'var(--accent)'
+                e.currentTarget.style.background = 'var(--accent-soft)'
+                e.currentTarget.style.transform = 'translateY(-3px)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.color = 'var(--muted)'
+                e.currentTarget.style.borderColor = 'var(--line)'
+                e.currentTarget.style.background = 'transparent'
+                e.currentTarget.style.transform = 'translateY(0)'
+              }}
             >
-              <Mail size={20} />
+              <Mail size={18} />
             </button>
-            <a
-              href="/resume.pdf"
-              download
-              className="text-neutral-400 hover:text-neutral-900 dark:hover:text-white transition-colors"
-            >
-              <FileText size={20} />
-            </a>
           </div>
         </FadeIn>
       </div>

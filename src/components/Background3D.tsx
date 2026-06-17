@@ -1,204 +1,172 @@
 'use client'
 
-import { useRef, useMemo } from 'react'
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { Points, PointMaterial, Float, Stars, Sparkles } from '@react-three/drei'
-import * as THREE from 'three'
-import { useScroll } from 'framer-motion'
+import { useRef, useEffect, useCallback } from 'react'
 
-function ParticleSwarm() {
-  const ref = useRef<THREE.Points>(null)
-  const { mouse, viewport } = useThree()
-  
-  // Create a memoized array of points
-  const [positions, colors] = useMemo(() => {
-    const count = 2000
-    const positions = new Float32Array(count * 3)
-    const colors = new Float32Array(count * 3)
-    
-    const colorA = new THREE.Color('#3b82f6') // Blue
-    const colorB = new THREE.Color('#6366f1') // Indigo
-    const colorC = new THREE.Color('#0ea5e9') // Sky blue
-
-    for (let i = 0; i < count; i++) {
-      // Spherical distribution
-      const r = 15 + Math.random() * 10
-      const theta = 2 * Math.PI * Math.random()
-      const phi = Math.acos(2 * Math.random() - 1)
-      
-      const x = r * Math.sin(phi) * Math.cos(theta)
-      const y = r * Math.sin(phi) * Math.sin(theta)
-      const z = r * Math.cos(phi)
-      
-      positions[i * 3] = x
-      positions[i * 3 + 1] = y
-      positions[i * 3 + 2] = z
-
-      // Mix colors
-      const mixedColor = colorA.clone().lerp(
-        Math.random() > 0.5 ? colorB : colorC,
-        Math.random()
-      )
-      
-      colors[i * 3] = mixedColor.r
-      colors[i * 3 + 1] = mixedColor.g
-      colors[i * 3 + 2] = mixedColor.b
-    }
-    
-    return [positions, colors]
-  }, [])
-
-  useFrame((state, delta) => {
-    if (ref.current) {
-      // Slow rotation
-      ref.current.rotation.x -= delta / 10
-      ref.current.rotation.y -= delta / 15
-      
-      // Slight mouse interactivity
-      ref.current.position.x = THREE.MathUtils.lerp(ref.current.position.x, (mouse.x * viewport.width) / 20, 0.05)
-      ref.current.position.y = THREE.MathUtils.lerp(ref.current.position.y, (mouse.y * viewport.height) / 20, 0.05)
-    }
-  })
-
-  return (
-    <points ref={ref}>
-      <bufferGeometry>
-        {/* @ts-expect-error - Known R3F typing issue with bufferAttribute */}
-        <bufferAttribute
-          attach="attributes-position"
-          count={positions.length / 3}
-          array={positions}
-          itemSize={3}
-        />
-        {/* @ts-expect-error - Known R3F typing issue with bufferAttribute */}
-        <bufferAttribute
-          attach="attributes-color"
-          count={colors.length / 3}
-          array={colors}
-          itemSize={3}
-        />
-      </bufferGeometry>
-      <pointsMaterial
-        size={0.06}
-        vertexColors
-        transparent
-        opacity={0.7}
-        sizeAttenuation={true}
-        depthWrite={false}
-        blending={THREE.NormalBlending}
-      />
-    </points>
-  )
-}
-
-function FloatingShapes() {
-  const meshRef1 = useRef<THREE.Mesh>(null)
-  const meshRef2 = useRef<THREE.Mesh>(null)
-  const meshRef3 = useRef<THREE.Mesh>(null)
-  const meshRef4 = useRef<THREE.Mesh>(null)
-  const meshRef5 = useRef<THREE.Mesh>(null)
-
-  useFrame((state) => {
-    const t = state.clock.getElapsedTime()
-    if (meshRef1.current) {
-      meshRef1.current.rotation.x = t * 0.2
-      meshRef1.current.rotation.y = t * 0.3
-    }
-    if (meshRef2.current) {
-      meshRef2.current.rotation.x = t * 0.1
-      meshRef2.current.rotation.y = t * 0.2
-    }
-    if (meshRef3.current) {
-      meshRef3.current.rotation.x = t * 0.15
-      meshRef3.current.rotation.y = t * 0.25
-    }
-    if (meshRef4.current) {
-      meshRef4.current.rotation.x = t * 0.25
-      meshRef4.current.rotation.y = t * 0.15
-    }
-    if (meshRef5.current) {
-      meshRef5.current.rotation.x = t * 0.2
-      meshRef5.current.rotation.y = t * 0.1
-    }
-  })
-
-  return (
-    <>
-      <Float speed={1.5} rotationIntensity={1} floatIntensity={2}>
-        <mesh ref={meshRef1} position={[9, -2, -5]} scale={1.5}>
-          <octahedronGeometry args={[1, 0]} />
-          <meshStandardMaterial color="#3b82f6" wireframe opacity={0.12} transparent />
-        </mesh>
-      </Float>
-
-      <Float speed={2} rotationIntensity={2} floatIntensity={1.5}>
-        <mesh ref={meshRef2} position={[-10, -6, -8]} scale={2}>
-          <icosahedronGeometry args={[1, 0]} />
-          <meshStandardMaterial color="#6366f1" wireframe opacity={0.1} transparent />
-        </mesh>
-      </Float>
-      
-      <Float speed={1} rotationIntensity={1.5} floatIntensity={2}>
-        <mesh ref={meshRef3} position={[8, -11, -10]} scale={2.5}>
-          <torusKnotGeometry args={[1, 0.3, 100, 16]} />
-          <meshStandardMaterial color="#0ea5e9" wireframe opacity={0.08} transparent />
-        </mesh>
-      </Float>
-
-      <Float speed={1.5} rotationIntensity={2} floatIntensity={1.5}>
-        <mesh ref={meshRef4} position={[-9, -16, -12]} scale={2.2}>
-          <octahedronGeometry args={[1, 0]} />
-          <meshStandardMaterial color="#3b82f6" wireframe opacity={0.12} transparent />
-        </mesh>
-      </Float>
-
-      <Float speed={1.2} rotationIntensity={1.5} floatIntensity={2}>
-        <mesh ref={meshRef5} position={[7, -21, -15]} scale={3}>
-          <icosahedronGeometry args={[1, 0]} />
-          <meshStandardMaterial color="#6366f1" wireframe opacity={0.1} transparent />
-        </mesh>
-      </Float>
-    </>
-  )
-}
-
-function CameraRig() {
-  const { camera } = useThree()
-  const { scrollYProgress } = useScroll()
-  
-  useFrame(() => {
-    // Move camera down as user scrolls to give a parallax feeling through the 3D space
-    camera.position.y = THREE.MathUtils.lerp(
-      camera.position.y,
-      -scrollYProgress.get() * 15,
-      0.05
-    )
-    
-    // Slight rotation based on scroll
-    camera.rotation.x = THREE.MathUtils.lerp(
-      camera.rotation.x,
-      scrollYProgress.get() * 0.2,
-      0.05
-    )
-  })
-  
-  return null
+interface Particle {
+  x: number
+  y: number
+  vx: number
+  vy: number
+  r: number
+  blue: boolean
 }
 
 export function Background3D() {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const particlesRef = useRef<Particle[]>([])
+  const mouseRef = useRef({ x: -9999, y: -9999 })
+  const animRef = useRef<number>(0)
+  const dimsRef = useRef({ w: 0, h: 0, dpr: 1 })
+
+  const resize = useCallback(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const dpr = Math.min(window.devicePixelRatio || 1, 2)
+    const w = innerWidth * dpr
+    const h = innerHeight * dpr
+    canvas.width = w
+    canvas.height = h
+    canvas.style.width = innerWidth + 'px'
+    canvas.style.height = innerHeight + 'px'
+    dimsRef.current = { w, h, dpr }
+
+    const count = Math.min(140, Math.floor((innerWidth * innerHeight) / 13000))
+    const particles: Particle[] = []
+    for (let i = 0; i < count; i++) {
+      particles.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.18 * dpr,
+        vy: (Math.random() - 0.5) * 0.18 * dpr,
+        r: (Math.random() * 1.4 + 0.4) * dpr,
+        blue: Math.random() > 0.55,
+      })
+    }
+    particlesRef.current = particles
+  }, [])
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    resize()
+
+    const onMouseMove = (e: MouseEvent) => {
+      mouseRef.current = {
+        x: e.clientX * dimsRef.current.dpr,
+        y: e.clientY * dimsRef.current.dpr,
+      }
+    }
+    const onMouseOut = () => {
+      mouseRef.current = { x: -9999, y: -9999 }
+    }
+
+    window.addEventListener('resize', resize)
+    window.addEventListener('mousemove', onMouseMove)
+    window.addEventListener('mouseout', onMouseOut)
+
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    function accentRGB() {
+      return document.documentElement.classList.contains('light')
+        ? '47,107,221'
+        : '106,160,255'
+    }
+    function baseRGB() {
+      return document.documentElement.classList.contains('light')
+        ? '90,90,100'
+        : '200,210,230'
+    }
+
+    function draw() {
+      const { w, h, dpr } = dimsRef.current
+      const particles = particlesRef.current
+      const mouse = mouseRef.current
+      ctx!.clearRect(0, 0, w, h)
+
+      const acc = accentRGB()
+      const base = baseRGB()
+      const linkDist = 130 * dpr
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i]
+        p.x += p.vx
+        p.y += p.vy
+        if (p.x < 0 || p.x > w) p.vx *= -1
+        if (p.y < 0 || p.y > h) p.vy *= -1
+
+        const mdx = p.x - mouse.x
+        const mdy = p.y - mouse.y
+        const md = Math.hypot(mdx, mdy)
+        if (md < 120 * dpr && md > 0) {
+          const f = (120 * dpr - md) / (120 * dpr)
+          p.x += (mdx / md) * f * 1.6
+          p.y += (mdy / md) * f * 1.6
+        }
+
+        ctx!.beginPath()
+        ctx!.arc(p.x, p.y, p.r, 0, Math.PI * 2)
+        ctx!.fillStyle = `rgba(${p.blue ? acc : base},${p.blue ? 0.85 : 0.45})`
+        ctx!.fill()
+
+        for (let j = i + 1; j < particles.length; j++) {
+          const q = particles[j]
+          const dx = p.x - q.x
+          const dy = p.y - q.y
+          const d = Math.hypot(dx, dy)
+          if (d < linkDist) {
+            ctx!.beginPath()
+            ctx!.moveTo(p.x, p.y)
+            ctx!.lineTo(q.x, q.y)
+            ctx!.strokeStyle = `rgba(${acc},${(1 - d / linkDist) * 0.18})`
+            ctx!.lineWidth = dpr * 0.6
+            ctx!.stroke()
+          }
+        }
+
+        if (md < linkDist * 1.4) {
+          ctx!.beginPath()
+          ctx!.moveTo(p.x, p.y)
+          ctx!.lineTo(mouse.x, mouse.y)
+          ctx!.strokeStyle = `rgba(${acc},${(1 - md / (linkDist * 1.4)) * 0.25})`
+          ctx!.lineWidth = dpr * 0.6
+          ctx!.stroke()
+        }
+      }
+      animRef.current = requestAnimationFrame(draw)
+    }
+
+    if (!prefersReduced) {
+      draw()
+    } else {
+      const acc = accentRGB()
+      const base = baseRGB()
+      particlesRef.current.forEach((p) => {
+        ctx!.beginPath()
+        ctx!.arc(p.x, p.y, p.r, 0, Math.PI * 2)
+        ctx!.fillStyle = `rgba(${p.blue ? acc : base},0.6)`
+        ctx!.fill()
+      })
+    }
+
+    return () => {
+      cancelAnimationFrame(animRef.current)
+      window.removeEventListener('resize', resize)
+      window.removeEventListener('mousemove', onMouseMove)
+      window.removeEventListener('mouseout', onMouseOut)
+    }
+  }, [resize])
+
   return (
-    <div className="fixed inset-0 -z-10 pointer-events-none">
-      <Canvas camera={{ position: [0, 0, 10], fov: 75 }} dpr={[1, 2]}>
-        {/* Removed the fixed white background so the theme color shows through */}
-        <ambientLight intensity={0.8} />
-        <directionalLight position={[10, 10, 5]} intensity={1} />
-        
-        <ParticleSwarm />
-        <FloatingShapes />
-        <Sparkles count={150} scale={20} size={1.5} speed={0.4} opacity={0.4} color="#6366f1" />
-        
-        <CameraRig />
-      </Canvas>
-    </div>
+    <>
+      <canvas
+        ref={canvasRef}
+        className="fixed inset-0 z-0 pointer-events-none"
+        style={{ width: '100%', height: '100%' }}
+      />
+      <div className="bg-veil" />
+    </>
   )
 }

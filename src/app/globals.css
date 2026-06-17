@@ -3,15 +3,168 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
 }
+
+/* ---------- Design tokens ---------- */
+:root {
+  --bg: #08080a;
+  --bg-alt: #0c0c0f;
+  --panel: #101015;
+  --line: rgba(255,255,255,0.08);
+  --line-strong: rgba(255,255,255,0.16);
+  --text: #f4f4f6;
+  --muted: #8b8b96;
+  --faint: #5c5c66;
+  --accent: #6aa0ff;
+  --accent-soft: rgba(106,160,255,0.14);
+  --accent-glow: rgba(106,160,255,0.35);
+  --tag-bg: rgba(255,255,255,0.05);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+:root.light {
+  --bg: #f6f6f4;
+  --bg-alt: #efefec;
+  --panel: #ffffff;
+  --line: rgba(0,0,0,0.10);
+  --line-strong: rgba(0,0,0,0.18);
+  --text: #16161a;
+  --muted: #5b5b64;
+  --faint: #9a9aa2;
+  --accent: #2f6bdd;
+  --accent-soft: rgba(47,107,221,0.10);
+  --accent-glow: rgba(47,107,221,0.28);
+  --tag-bg: rgba(0,0,0,0.04);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
 
 body {
-  background: #ffffff;
-  color: #171717;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background 0.5s var(--ease), color 0.5s var(--ease);
 }
 
-.dark body {
-  background: #0a0a0a;
-  color: #e5e5e5;
+::selection { background: var(--accent-glow); color: #fff; }
+
+/* ---------- Scroll progress ---------- */
+#scroll-progress {
+  position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+  background: linear-gradient(90deg, var(--accent), #b5cdff);
+  z-index: 60; box-shadow: 0 0 12px var(--accent-glow);
+  pointer-events: none;
 }
+
+/* ---------- Background veil ---------- */
+.bg-veil {
+  position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  background:
+    radial-gradient(900px 600px at 50% -5%, var(--accent-soft), transparent 60%),
+    radial-gradient(1200px 800px at 100% 100%, rgba(106,160,255,0.05), transparent 55%);
+}
+
+/* ---------- Segment labels ---------- */
+.seg-label {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--accent); display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+}
+.seg-label::before {
+  content: ""; width: 28px; height: 1px; background: var(--accent); opacity: 0.6;
+}
+
+/* ---------- Tag ---------- */
+.tag {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px; letter-spacing: 0.5px; text-transform: uppercase;
+  color: var(--muted); padding: 4px 9px; border: 1px solid var(--line);
+  border-radius: 6px; background: var(--tag-bg);
+}
+
+/* ---------- Marquee ---------- */
+.marquee {
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  overflow: hidden; padding: 18px 0;
+  background: var(--bg-alt); position: relative; z-index: 2;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.marquee-track {
+  display: flex; gap: 48px; width: max-content;
+  animation: scroll-x 32s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+.marquee-track span {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 15px; color: var(--muted); letter-spacing: 1px;
+  display: inline-flex; align-items: center; gap: 48px; white-space: nowrap;
+}
+.marquee-track span::after { content: "\2726"; color: var(--accent); font-size: 11px; }
+
+@keyframes scroll-x { to { transform: translateX(-50%); } }
+
+/* ---------- Timeline ---------- */
+.tl-item { position: relative; padding-left: 38px; padding-bottom: 44px; }
+.tl-item:last-child { padding-bottom: 0; }
+.tl-item::before {
+  content: ""; position: absolute; left: 6px; top: 26px; bottom: -12px;
+  width: 1px; background: var(--line);
+}
+.tl-item:last-child::before { display: none; }
+.tl-dot {
+  position: absolute; left: 0; top: 7px; width: 13px; height: 13px; border-radius: 50%;
+  border: 2px solid var(--accent); background: var(--bg); transition: 0.3s var(--ease);
+}
+.tl-item:hover .tl-dot {
+  background: var(--accent); box-shadow: 0 0 0 5px var(--accent-soft);
+}
+
+/* ---------- Project card glow ---------- */
+.proj-card {
+  position: relative; border: 1px solid var(--line); border-radius: 18px; padding: 28px;
+  background: var(--panel); overflow: hidden; transition: 0.4s var(--ease);
+  display: flex; flex-direction: column; min-height: 250px;
+}
+.proj-card::before {
+  content: ""; position: absolute; inset: 0; opacity: 0; transition: opacity 0.4s var(--ease);
+  background: radial-gradient(420px circle at var(--mx,50%) var(--my,0%), var(--accent-soft), transparent 60%);
+}
+.proj-card:hover { border-color: var(--line-strong); transform: translateY(-5px); }
+.proj-card:hover::before { opacity: 1; }
+
+/* ---------- Scroll cue ---------- */
+.scroll-cue {
+  color: var(--faint); font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px; letter-spacing: 2px;
+}
+.scroll-cue .line {
+  width: 1px; height: 38px;
+  background: linear-gradient(var(--faint), transparent);
+  position: relative; overflow: hidden;
+}
+.scroll-cue .line::after {
+  content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 40%;
+  background: var(--accent); animation: drop 1.8s var(--ease) infinite;
+}
+@keyframes drop { 0% { transform: translateY(-100%); } 100% { transform: translateY(250%); } }
+
+/* ---------- Skill hover ---------- */
+.skill-item {
+  font-size: 15px; color: var(--muted); padding: 7px 0; transition: 0.2s var(--ease);
+  display: flex; align-items: center; gap: 10px; cursor: default;
+}
+.skill-item::before {
+  content: ""; width: 5px; height: 5px; border-radius: 50%;
+  background: var(--faint); transition: 0.2s; flex-shrink: 0;
+}
+.skill-item:hover { color: var(--text); transform: translateX(5px); }
+.skill-item:hover::before { background: var(--accent); box-shadow: 0 0 8px var(--accent-glow); }
+
+/* ---------- Ping animation ---------- */
+@keyframes ping { 0% { transform: scale(0.6); opacity: 1; } 100% { transform: scale(1.6); opacity: 0; } }
