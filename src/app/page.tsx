@@ -54,9 +54,10 @@ const projects = [
     num: '01',
     title: 'Summarist',
     description:
-      'A polished book-summary platform — auth, dynamic routing, audio playback and a Stripe-style subscription flow. My current deep-dive into production Next.js architecture.',
+      'A polished book-summary platform — auth, dynamic routing, audio playback and a Stripe-style subscription flow built with production Next.js architecture.',
     tech: ['Next.js', 'TypeScript', 'Firebase', 'Tailwind'],
-    featured: true,
+    github: 'https://github.com/Stuede1/cole-internship-2.0',
+    link: 'https://cole-internship-2-0.vercel.app/',
   },
   {
     num: '02',
@@ -245,14 +246,6 @@ export default function Home() {
                     <div className="flex justify-between items-start">
                       <span className="font-mono text-xs" style={{ color: 'var(--faint)' }}>{project.num}</span>
                       <div className="flex gap-2.5" style={{ color: 'var(--muted)' }}>
-                        {project.featured && (
-                          <span
-                            className="font-mono text-[10.5px] tracking-[1px] uppercase px-[7px] py-[2px] rounded-[5px] border"
-                            style={{ color: 'var(--accent)', borderColor: 'var(--accent)' }}
-                          >
-                            Building now
-                          </span>
-                        )}
                         {project.github && (
                           <a href={project.github} target="_blank" rel="noopener noreferrer" className="transition-colors duration-200 hover:text-[var(--accent)]">
                             <GithubIcon />
