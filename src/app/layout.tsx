@@ -15,6 +15,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Cole Stuedeman — Frontend Developer",
   description: "Frontend developer portfolio showcasing projects, skills, and experience.",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({
