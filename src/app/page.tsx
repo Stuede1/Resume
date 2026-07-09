@@ -66,7 +66,7 @@ const projects = [
       'A responsive movie-browsing app with live search, detail views and a clean, Netflix-inspired interface powered by a public film API.',
     tech: ['React', 'JavaScript', 'CSS', 'API'],
     github: 'https://github.com/Stuede1/movieflix',
-    link: 'https://stuede1.github.io/movieflix',
+    link: 'https://movieflix-cole-stuedeman.vercel.app/',
   },
   {
     num: '03',
